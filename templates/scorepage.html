@@ -48,6 +48,16 @@
         max-width: 100%;
         border-radius: 10px;
     }
+    .class-шашлык {
+        color: red; /* bbq 类别的文本颜色为红色 */
+    }
+    .class-стейк {
+        color: green; /* chick 类别的文本颜色为蓝色 */
+    }
+    .class-цыпленок {
+        color: yellow; /* steak 类别的文本颜色为黄色 */
+        background-color: mediumblue;
+    }
 </style>
 </head>
 <body>
@@ -65,8 +75,14 @@
         <img class="uploaded-image" src="{{ uploaded_image }}" alt="Uploaded Image">
         {% endif %}
         {% if scorePrediction %}
-        <h3>Результаты распознавания: {{scorePrediction}}</h3>
+        <h3 class="class-{{ scorePrediction|lower }}">Результаты распознавания: {{scorePrediction}}
+            {{color}}
+            {{time}}
+        </h3>
+        
+        {{DescriptionPrediction}}
         {% endif %}
+        
         {% if error_message %}
         <h3>ошибка:: {{error_message}}</h3>
         {% endif %}
