@@ -1,79 +1,72 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <meta charset="windows-1251">
-    <title>Домашнее задание 1</title>
-    <style>
-        /* Add some padding on document's body to prevent the content
-    to go underneath the header and footer */
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
-
-        .fixed-header,
-        .fixed-footer {
-            width: 100%;
-            position: fixed;
-            background: #333;
-            padding: 10px 0;
-            color: #fff;
-        }
-
-        .fixed-header {
-            top: 0;
-        }
-
-        .fixed-footer {
-            bottom: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            /* Center the DIV horizontally */
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 7px 25px;
-            display: inline-block;
-        }
-    </style>
+<meta charset="utf-8">
+<title>分类图片</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .upload-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .upload-form label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .upload-form input[type="file"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .upload-form input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .upload-form input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    .uploaded-image {
+        margin-top: 20px;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+</style>
 </head>
-
 <body>
-    <div class="fixed-header">
-        <div class="container">
-
-        </div>
-    </div>
     <div class="container">
-        <form action="predictImage" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="col-md-4 col-sm-4">
-                <label for="FilePath">Загрузить изображение:</label>
-            </div>
-            <input name="filePath" type="file"><br><br>
-            <input type="submit" value="Submit">
-        </form>
+        <div class="upload-form">
+            <h2>上传图片并进行分类</h2>
+            <form action="predictImage" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="FilePath">选择图片:</label>
+                <input name="filePath" type="file"><br><br>
+                <input type="submit" value="提交">
+            </form>
+        </div>
         {% if uploaded_image %}
-        <img src="{{ uploaded_image }}" alt="Uploaded Image" style="max-width: 400px;">
+        <img class="uploaded-image" src="{{ uploaded_image }}" alt="Uploaded Image">
         {% endif %}
-    </div>
-
-    <div>
-        <br>
         {% if scorePrediction %}
-        <h3>The classification is : {{scorePrediction}}</h3>
+        <h3>分类结果: {{scorePrediction}}</h3>
         {% endif %}
-
-    </div>
-    <div class="fixed-footer">
-        <div class="container"></div>
     </div>
 </body>
-
 </html>
