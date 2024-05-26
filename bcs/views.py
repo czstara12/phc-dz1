@@ -16,7 +16,7 @@ def predictImage(request):
     filePathName = fs.url(filePathName)
     modelName = request.POST.get('modelName')
     scorePrediction = predictImageData(modelName, '.'+filePathName)
-    context = {'scorePrediction': scorePrediction}
+    context = {'scorePrediction': scorePrediction, 'uploaded_image': filePathName}  # 将上传的图片路径传递给模板
     return render(request, 'scorepage.html', context)
 
 def predictImageData(modelName, filePath):

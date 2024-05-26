@@ -53,13 +53,17 @@
     <div class="container">
         <form action="predictImage" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
             <div class="col-md-4 col-sm-4">
                 <label for="FilePath">Загрузить изображение:</label>
-            </div> <input name="filePath" type="file"><br><br>
+            </div>
+            <input name="filePath" type="file"><br><br>
             <input type="submit" value="Submit">
         </form>
+        {% if uploaded_image %}
+        <img src="{{ uploaded_image }}" alt="Uploaded Image" style="max-width: 400px;">
+        {% endif %}
     </div>
+
     <div>
         <br>
         {% if scorePrediction %}
