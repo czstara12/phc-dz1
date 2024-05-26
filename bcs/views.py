@@ -4,12 +4,16 @@ import onnxruntime
 import numpy as np
 from PIL import Image
 
-imageClassList = {'0': 'bbq', '1': 'chick', '2': 'steak'}  #Сюда указать классы
+imageClassList = {'0': 'шашлык', '1': 'стейк', '2': 'цыпленок'}  #Сюда указать классы
 
 def scoreImagePage(request):
     return render(request, 'scorepage.html')
 
 def predictImage(request):
+    if 'filePath' not in request.FILES:
+        error_message = "Пожалуйста, выберите файл для загрузки первым"
+        return render(request, 'scorepage.html', {'error_message': error_message})
+    
     fileObj = request.FILES['filePath']
     fs = FileSystemStorage()
     filePathName = fs.save('images/'+fileObj.name,fileObj)

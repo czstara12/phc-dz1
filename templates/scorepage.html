@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>分类图片</title>
+<title>идентифицировать</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -53,19 +53,22 @@
 <body>
     <div class="container">
         <div class="upload-form">
-            <h2>上传图片并进行分类</h2>
+            <h2>Загрузите изображения и идентифицируйте их</h2>
             <form action="predictImage" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <label for="FilePath">选择图片:</label>
+                <label for="FilePath">Выберите изображение:</label>
                 <input name="filePath" type="file"><br><br>
-                <input type="submit" value="提交">
+                <input type="submit" value="представлять на рассмотрение">
             </form>
         </div>
         {% if uploaded_image %}
         <img class="uploaded-image" src="{{ uploaded_image }}" alt="Uploaded Image">
         {% endif %}
         {% if scorePrediction %}
-        <h3>分类结果: {{scorePrediction}}</h3>
+        <h3>Результаты распознавания: {{scorePrediction}}</h3>
+        {% endif %}
+        {% if error_message %}
+        <h3>ошибка:: {{error_message}}</h3>
         {% endif %}
     </div>
 </body>
