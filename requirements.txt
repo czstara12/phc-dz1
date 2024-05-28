@@ -2,3 +2,4 @@ onnx
 onnxruntime
 numpy
 pillow
+Django
